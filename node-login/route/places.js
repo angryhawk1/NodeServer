@@ -17,8 +17,8 @@ module.exports = (router, foursquare, config) => {
 	      res.send('An error was thrown: ' + error.message);
 	    }
 	    else {
-	       res.status(res.status).json({ message: res.message, token: accessToken });
-	       //res.redirect('/places?token='+accessToken);
+	       accessToken = accessToken;
+	       res.redirect('/places?token='+accessToken);
 	    }
 	  });
 	});
@@ -29,7 +29,7 @@ module.exports = (router, foursquare, config) => {
 	})
 
 	router.get('/places', function (req, res) {
-	  var accessToken = req.query.token;
+	  var accessToken = accessToken;
 	  var lat = 49.872677;
 	  var lng = 8.632473;
 	  var near = null
