@@ -30,8 +30,8 @@ module.exports = (router, foursquare, config) => {
 
 	router.get('/places', function (req, res) {
 	  var accessToken = accessToken;
-	  var lat = 49.872677;
-	  var lng = 8.632473;
+	  var lat = req.query.lat;
+	  var lng = req.query.lng;
 	  var near = null
 	  var cb = function(error, json) {
 	  	var response = [];
@@ -51,7 +51,6 @@ module.exports = (router, foursquare, config) => {
 
 	  }
 	  var venues = foursquare.Venues.explore(lat, lng, near, config, accessToken, cb);
-	  console.log(JSON.stringify(venues));
 	})
 
 
