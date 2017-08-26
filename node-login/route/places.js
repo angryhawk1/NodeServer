@@ -1,5 +1,8 @@
 'use strict';
 var accessToken;
+const checkin = require('../functions/checkin');
+const testuser = require('../functions/testuser');
+
 
 module.exports = (router, foursquare, config) => {
 
@@ -67,6 +70,50 @@ module.exports = (router, foursquare, config) => {
 	  var venues = foursquare.Venues.getVenue(id, accessToken, cb);
 	})
 
+	router.post('/checkinVenue', (req, res) => {
+		const email = req.query.email;
+		const venueId = req.query.venueId;
+
+		if (!venueId || !email ) {
+
+			res.status(400).json({message: 'Invalid Request !'});
+
+		} else {
+
+			checkin.checkinVenue(venueId, email)
+
+			.then(result => {
+
+				res.status(result.status).json({ message: result.message })
+			})
+
+			.catch(err => res.status(err.status).json({ message: err.message }));
+		}
+	});
+
+	router.post('/testuser', (req, res) => {
+
+		const name = "req.body.name";
+		const email = "req.body.email";
+		const password = "req.body.password";
+
+		if (!name || !email || !password || !name.trim() || !email.trim() || !password.trim()) {
+
+			res.status(400).json({message: 'Invalid Request !'});
+
+		} else {
+
+			testuser.registerUser(name, email, password)
+
+			.then(result => {
+
+				res.setHeader('Location', '/users/'+email);
+				res.status(result.status).json({ message: result.message })
+			})
+
+			.catch(err => res.status(err.status).json({ message: err.message }));
+		}
+	});
 
 
 }

@@ -3,7 +3,6 @@
 const auth = require('basic-auth');
 const jwt = require('jsonwebtoken');
 
-const register = require('../functions/register');
 const login = require('../functions/login');
 const profile = require('../functions/profile');
 const password = require('../functions/password');
