@@ -54,4 +54,19 @@ module.exports = (router, foursquare, config) => {
 	})
 
 
+	router.get('/venue', function (req, res) {
+	  var accessToken = accessToken;
+	  var id = req.query.venueId;
+	  console.log(id);
+	  var cb = function(error, json) {
+	  	var response = {};
+	  	//console.log(JSON.stringify(json));
+	  	response.name = json.venue.name;
+	  	res.send(response);
+	  }
+	  var venues = foursquare.Venues.getVenue(id, accessToken, cb);
+	})
+
+
+
 }
