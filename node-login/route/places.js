@@ -100,7 +100,7 @@ module.exports = (router, foursquare, config) => {
 
 		const name = req.query.venueId;
 		const email =req.query.email;
-		const tips = "comment"; 
+		const tips = req.query.tips; 
 		if (!name || !email || !name.trim() || !email.trim()) {
 
 			res.status(400).json({message: 'Invalid Request !'});
