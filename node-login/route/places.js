@@ -1,6 +1,8 @@
 'use strict';
 var accessToken;
 const checkin = require('../functions/checkin');
+const comment = require('../functions/comment');
+
 
 
 module.exports = (router, foursquare, config) => {
@@ -93,6 +95,30 @@ module.exports = (router, foursquare, config) => {
 			.catch(err => res.status(err.status).json({ message: err.message }));
 		}
 	});
+
+	router.post('/addComment', (req, res) => {
+
+		const name = req.query.venueId;
+		const email =req.query.email;
+
+		if (!name || !email || !name.trim() || !email.trim()) {
+
+			res.status(400).json({message: 'Invalid Request !'});
+
+		} else {
+
+			comment.putComment(name, email)
+
+			.then(result => {
+
+				res.setHeader('Location', '/users/'+email);
+				res.status(result.status).json({ message: result.message })
+			})
+
+			.catch(err => res.status(err.status).json({ message: err.message }));
+		}
+	});
+
 
 
 }
