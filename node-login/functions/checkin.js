@@ -1,20 +1,20 @@
 'use strict';
 
-const testuser = require('../models/checkin');
+const entry = require('../models/checkin');
 
 exports.checkInVenue = (name, email) => 
 
 	new Promise((resolve,reject) => {
 
 
-		const newUser = new testuser({
+		const checkinEntry = new entry({
 
 			venue_id: name,
 			email: email,
 			created_at: new Date()
 		});
 
-		newUser.save()
+		checkinEntry.save()
 
 		.then(() => resolve({ status: 201, message: 'User Registered Sucessfully !' }))
 

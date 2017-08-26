@@ -73,17 +73,16 @@ module.exports = (router, foursquare, config) => {
 
 	router.post('/checkinVenue', (req, res) => {
 
-		const name = "req.body.name";
-		const email = "req.body.email";
-		const password = "req.body.password";
+		const name = req.query.venueId;
+		const email =req.query.email;
 
-		if (!name || !email || !password || !name.trim() || !email.trim() || !password.trim()) {
+		if (!name || !email || !name.trim() || !email.trim()) {
 
 			res.status(400).json({message: 'Invalid Request !'});
 
 		} else {
 
-			checkin.checkInVenue(name, email, password)
+			checkin.checkInVenue(name, email)
 
 			.then(result => {
 
