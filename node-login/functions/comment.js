@@ -2,7 +2,7 @@
 
 const entry = require('../models/comment');
 
-exports.putComment = (name, email) => 
+exports.putComment = (name, email, tips) => 
 
 	new Promise((resolve,reject) => {
 
@@ -11,6 +11,7 @@ exports.putComment = (name, email) =>
 
 			venue_id: name,
 			email: email,
+			tips: tips,
 			created_at: new Date()
 		});
 
