@@ -6,8 +6,10 @@ const Schema = mongoose.Schema;
 
 const checkinSchema = mongoose.Schema({ 
 
-	venueId 			: String,
-	userEmail			: String	
+	venue_id 			: String,
+	email			: String, 
+	created_at		: String
+	
 });
 
 mongoose.Promise = global.Promise;
